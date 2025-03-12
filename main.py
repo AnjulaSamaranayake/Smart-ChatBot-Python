@@ -23,3 +23,22 @@ corpus = article.text
 #print the article text
 print(corpus)
 
+#Tokenization
+text = corpus
+sentences_list = nltk.sent_tokenize(text) # A list of sentences
+
+#Print the list of sentences
+print(sentences_list)
+
+#A function to return a random greeting to a users greeting
+def greeting_response(text):
+    text = text.lower()
+
+    #Users Greeting
+    user_greetings = ['hi', 'hey', 'hello', 'hola']
+    #Bots greeting response
+    bot_greetings = ['hi', 'hey', 'hello']
+
+    for word in text.splot():
+        if word in user_greetings:
+            return random.choice(bot_greetings)
