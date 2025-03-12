@@ -67,3 +67,20 @@ def bot_response(user_input):
     similarity_scores = cosine_similarity(cm[-1], cm)
     similarity_scores_list = similarity_scores.flatten()
     index = index_sort(similarity_scores_list)
+    index = index[1:]
+    response_flag = 0
+
+    j=0
+    for i in range(len(index)):
+        if similarity_scores_list[index[i]] > 0.0:
+            bot_response = bot_response +''+ sentences_list[index[i]]
+            response_flag = 1
+            j=j+1
+            if j > 2:
+                break
+
+    if response_flag == 0:
+        bot_response = bot_response+''+"I'm sorry, I don't understand you."
+
+        sentences_list.remove(user_input)
+        return bot_response
