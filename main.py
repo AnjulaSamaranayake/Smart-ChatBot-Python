@@ -42,3 +42,28 @@ def greeting_response(text):
     for word in text.splot():
         if word in user_greetings:
             return random.choice(bot_greetings)
+
+def index_sort(list_var):
+    length = len(list_var)
+    list_index = list(range(0, length))
+
+    x = list_var
+    for i in range(length):
+        for j in range(length):
+            if x[list_index[i]] > x[list_index[j]]:
+                #Swap
+                temp = list_index[i]
+                list_index[i] = list_index[j]
+                list_index[j] = temp
+
+                return list_index
+
+#Create the bots response
+def bot_response(user_input):
+    user_input = user_input.lower()
+    sentences_list.append(user_input)
+    bot_response = ''
+    cm = CountVectorizer().fit_transform(sentences_list)
+    similarity_scores = cosine_similarity(cm[-1], cm)
+    similarity_scores_list = similarity_scores.flatten()
+    index = index_sort(similarity_scores_list)
